@@ -1,21 +1,19 @@
 package com.nt.main;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import com.nt.config.AppConfig;
-import com.nt.sbeans.WeekDayFinder;
-
+import com.nt.sbeans.WishMessageGenerator;
+import com.nt.sbeans.WishMessageGenerator;
 public class DependencyInjectionTest {
-public static void main(String []args) {
-	try(AnnotationConfigApplicationContext ctx= new AnnotationConfigApplicationContext(AppConfig.class);){
-		WeekDayFinder finder= ctx.getBean("wf", WeekDayFinder.class);
-		System.out.println("result::"+finder);
-		
-	}
-	catch(Exception e) {
-		e.printStackTrace();
-	}
-
+	
+public static void main (String [] args) {
+	 FileSystemXmlApplicationContext ctx= new FileSystemXmlApplicationContext("src\\com\\nt\\cfgs\\applicationContent.xml");
+	 Object obj= ctx.getBean("wmg");
+	 
+	 	WishMessageGenerator generator= (WishMessageGenerator)obj;
+	 	String result=generator.generatorWishMessage("Priyanka");
+	 	System.out.println(result);
+	 	ctx.close();
+	 
 }
-
 }
