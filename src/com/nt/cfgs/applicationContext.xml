@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-         http://www.springframework.org/schema/beans
-         http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- Bean to create a LocalDate using factory-method -->
-    <bean id="currentDate" class="java.time.LocalDate" factory-method="now"/>
+    <context:component-scan base-package="com.nt.sbeans" />
 
-    <!-- Bean to inject LocalDate via setter -->
-    <bean id="wmg" class="com.nt.sbeans.WishMessageGenerator">
-        <property name="currentDate" ref="currentDate"/>
-    </bean>
+    <bean id="ldate" class="java.time.LocalDate" factory-method="now" />
+    <bean id="ltime" class="java.time.LocalTime" factory-method="now" />
 </beans>
