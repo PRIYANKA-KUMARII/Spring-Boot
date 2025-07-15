@@ -4,18 +4,12 @@
        xsi:schemaLocation="
          http://www.springframework.org/schema/beans
          http://www.springframework.org/schema/beans/spring-beans.xsd">
-        <!-- 
-        Setter Injection
-        ================
-         <bean id="wmg" class="com.nt.sbeans.UserService">
-             <property name="name" value="priya"/>
-             <property name="id" value="102"/>
-             
-         </bean>
-         --> 
-         <bean id="wmg" class="com.nt.sbeans.UserService">
-             <constructor-arg value="priya"/>
-             <constructor-arg value="102"/>
-         </bean>
-         
-     </beans>
+
+    <!-- Bean to create a LocalDate using factory-method -->
+    <bean id="currentDate" class="java.time.LocalDate" factory-method="now"/>
+
+    <!-- Bean to inject LocalDate via setter -->
+    <bean id="wmg" class="com.nt.sbeans.WishMessageGenerator">
+        <property name="currentDate" ref="currentDate"/>
+    </bean>
+</beans>
