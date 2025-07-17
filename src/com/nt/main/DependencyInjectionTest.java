@@ -1,21 +1,27 @@
 package com.nt.main;
+import java.time.LocalDate;
+import java.util.Arrays;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.nt.config.AppConfig;
-import com.nt.sbeans.WeekDayFinder;
+import com.nt.sbeans.SeasonFinder;
 
 public class DependencyInjectionTest {
-public static void main(String []args) {
-	try(AnnotationConfigApplicationContext ctx= new AnnotationConfigApplicationContext(AppConfig.class);){
-		WeekDayFinder finder= ctx.getBean("wf", WeekDayFinder.class);
-		System.out.println("result::"+finder);
+	public static void main(String [] args) {
+		System.out.println("DependencyInjectionTest.main() (start)");
+		try(ClassPathXmlApplicationContext ctx=new ClassPathXmlApplicationContext 
+				("com/nt/cfgs/applicationContext.xml")){
+		SeasonFinder finder=ctx.getBean("sf",SeasonFinder.class);
+		
+	String msg=finder.showSeasonName();
+		System.out.print(msg);	System.out.println("-------------------");
+		System.out.println("Spring Beans count:: "+ctx.getBeanDefinitionCount());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("DependencyInjectionTest.main()(end)");
 		
 	}
-	catch(Exception e) {
-		e.printStackTrace();
-	}
-
-}
 
 }
