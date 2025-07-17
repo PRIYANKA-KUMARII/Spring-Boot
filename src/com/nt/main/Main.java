@@ -1,19 +1,14 @@
 package com.nt.main;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import com.nt.sbeans.Launcher;
+import com.nt.sbeans.SpringConfigureFile;
+import com.nt.sbeans.Student;
 
 public class Main {
-	public static void main(String [] args) {
-		 AnnotationConfigApplicationContext ctx= new AnnotationConfigApplicationContext();
-		 ctx.scan("com.nt.sbeans");
-		
-		 ctx.refresh();
-		 Launcher lau= ctx.getBean(Launcher.class);
-		 lau.launcher();
-		 ctx.close();
-		 
-		 }
 
+	public static void main(String [] args) {
+		 ApplicationContext context= new AnnotationApplicationContext(SpringConfigureFile.class);
+		 Student std= context.getBean(Student.class);
+		 std.display();
+		 
+	}
 }
