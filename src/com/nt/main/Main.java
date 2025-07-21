@@ -1,14 +1,16 @@
 package com.nt.main;
 
-import com.nt.sbeans.SpringConfigureFile;
-import com.nt.sbeans.Student;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.nt.sbeans.Car;
 
 public class Main {
-
 	public static void main(String [] args) {
-		 ApplicationContext context= new AnnotationApplicationContext(SpringConfigureFile.class);
-		 Student std= context.getBean(Student.class);
-		 std.display();
-		 
+		 AnnotationConfigApplicationContext ctx= new AnnotationConfigApplicationContext("com.nt.sbeans");
+		Car car= ctx.getBean(Car.class);
+		car.drive();
+		ctx.close();
+		
 	}
+
 }
