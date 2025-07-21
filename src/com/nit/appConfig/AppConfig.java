@@ -1,24 +1,17 @@
 package com.nit.appConfig;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import com.nit.sbeans.Book;
-import com.nit.sbeans.Library;
-
-@Configuration
+import com.nit.sbeans.CarLoanCalculator;
+import com.nit.sbeans.HomeLoanCalculator;
+import com.nit.sbeans.LoanProcessor;
 
 public class AppConfig {
-	@Bean
-	public Book book() {
-		return new Book("Spring in Action");
-		
+	public static void main(String [] args) {
+		 LoanProcessor homeProcessor= new LoanProcessor(new HomeLoanCalculator());
+		 System.out.println("=====Home Loan ========");
+		 homeProcessor.processLoan(5000.0);
+		 LoanProcessor carProcessor= new LoanProcessor(new CarLoanCalculator());
+		 System.out.println("===============car Loan============");
+		 carProcessor.processLoan(6000);
 	}
-	@Bean
-	public Library Library (Book book) {
-		return new Library(book);
-		
-	}
-	
 
 }
